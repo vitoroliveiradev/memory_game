@@ -14,25 +14,21 @@ export const MemoryGame = () => {
   function restart() {
     setGameOver(false);
     game.clearCards();
-    setCards(game.createCardsFromTechs()); 
+    setCards(game.createCardsFromTechs());
   }
 
   function handleFlip(card) {
-    if (game.setCard(card.id)) {
-      if (game.secondCard) {
-        if (game.checkMatch()) {
-          game.clearCards();
-          if (game.checkGameOver()) {
-            setGameOver(true);
-          }
-        } else {
-          setTimeout(() => {
-            game.unflipCards();
-            setCards([...game.cards]);
-          }, 1000);
-        }
+    game.flipCard(
+      card.id,
+      () => {
+        // GameOverCallback
+        setGameOver(true);
+      },
+      () => {
+        // noMatchCallback
+        setCards([...game.cards]);
       }
-    }
+    );
     setCards([...game.cards]);
   }
 
