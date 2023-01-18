@@ -7,7 +7,7 @@ export const CardElement = (props) => {
     >
       <div className="card_front">
         <img
-          src={`src/assets/images/${props.card.icon}.png`}
+          src={`/assets/images/${props.card.icon}.png`}
           alt={props.card.icon}
           className="icon"
         />
